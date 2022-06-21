@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
+import { connect } from "./utils/db.js";
 
 const { json, urlencoded } = bodyParser;
 
@@ -21,8 +22,13 @@ app.post("/", (req, res) => {
   res.send({ message: "ok" });
 });
 
-export const start = () => {
-  app.listen(8080, () => {
-    console.log(`Server running on port 8080`);
-  });
+export const start = async () => {
+  try {
+    await connect();
+    app.listen(8080, () => {
+      console.log(`Server running on port 8080`);
+    });
+  } catch (e) {
+    console.error(e);
+  }
 };
