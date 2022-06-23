@@ -4,6 +4,9 @@ import cors from "cors";
 import morgan from "morgan";
 import { connect } from "./utils/db.js";
 
+// routes
+import userRouter from "./resources/user/user.router.js";
+
 const { json, urlencoded } = bodyParser;
 
 export const app = express();
@@ -13,14 +16,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-  res.send({ message: "Hello" });
-});
-
-app.post("/", (req, res) => {
-  console.log(req.body);
-  res.send({ message: "ok" });
-});
+app.use("/api/user", userRouter);
 
 export const start = async () => {
   try {
