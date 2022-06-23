@@ -9,7 +9,7 @@ export const getOne = (model) => async (req, res) => {
       .exec();
 
     if (!document) {
-      return res.status(400).end();
+      return res.status(400).json({ message: "Sorry no list found" }).end();
     }
 
     return res.status(200).json({ data: document });

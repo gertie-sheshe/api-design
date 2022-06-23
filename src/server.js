@@ -6,6 +6,7 @@ import { connect } from "./utils/db.js";
 
 // routes
 import userRouter from "./resources/user/user.router.js";
+import listRouter from "./resources/list/list.router.js";
 
 const { json, urlencoded } = bodyParser;
 
@@ -17,6 +18,7 @@ app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.use("/api/user", userRouter);
+app.use("/api/list", listRouter);
 
 export const start = async () => {
   try {
